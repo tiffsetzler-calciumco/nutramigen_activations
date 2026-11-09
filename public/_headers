@@ -1,0 +1,5 @@
+# Cloudflare static asset headers. no-cache = browsers re-check for updates,
+# so content/image edits show up right away after a deploy.
+/*
+  Cache-Control: no-cache
+  X-Content-Type-Options: nosniff

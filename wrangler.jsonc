@@ -1,0 +1,15 @@
+{
+  // Cloudflare Workers config — serves everything in ./public as a static site.
+  // Docs: https://developers.cloudflare.com/workers/static-assets/
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nutramigen-activations",
+  "compatibility_date": "2026-10-01",
+  // Public URL: https://nutramigen-activations.<account-subdomain>.workers.dev
+  "workers_dev": true,
+  // Each branch / pull request gets its own preview URL.
+  "preview_urls": true,
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "nutramigen-activations",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nutramigen quiz activation game",
+  "scripts": {
+    "dev": "wrangler dev",
+    "start": "python3 -m http.server 5173 -d public",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
