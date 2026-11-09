@@ -10,9 +10,9 @@ const seconds = (key, fallback) => {
 
 export const CONFIG = {
   /** No interaction for this long → show the "still playing?" popup. */
-  idleWarnMs: seconds("warn", 30_000),
-  /** Popup ignored for this long → go back to the homepage and reset. */
-  idleResetMs: seconds("reset", 45_000),
+  idleWarnMs: seconds("warn", 45_000),
+  /** Popup ignored for this long → go back to the start screen and reset. */
+  idleResetMs: seconds("reset", 30_000),
   /** Length of the zoom-in animation when an item is selected. */
   zoomMs: 650,
 };

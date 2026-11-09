@@ -11,7 +11,7 @@ Layout and flow follow the **Wireframe** page in Figma (Nutramigen_Activations).
 3. **Question**: progress bar (`#/5` left, `XX% Complete` right), the ornament, and a card with the question and answers A–D.
 4. **After answering**: the ornament flips to its "after" version, in color if correct and black & white if incorrect. The card shows *Your answer* | *Correct answer*, a "Your answer is correct/incorrect!" note with the Nutramigen statement, then **Select another ornament →** (or **See my score →** on the last one). Answered ornaments stay flipped on the mobile.
 5. **End**: "Congratulations! You have scored a X/5." with the QR code and share copy.
-6. **Idle**: after 30s with no taps a "still there?" popup appears. Ignore it for 45s and the game resets to the attract screen. A "Return to start" bar sits at the bottom of every screen.
+6. **Idle**: after 45s with no taps a "still there?" popup appears. Ignore it for 30s and the game resets to the attract screen. A "Return to start" bar sits at the bottom of every screen.
 
 ## File structure
 
@@ -22,7 +22,7 @@ public/                        ← everything Cloudflare serves
 ├── css/styles.css             ← styles; colors/fonts are tokens at the top
 ├── js/
 │   ├── content.js             ← ✏️ ALL copy, questions, answers, statements, image paths
-│   ├── config.js              ← timings (idle 30s / 45s, zoom speed)
+│   ├── config.js              ← timings (idle 45s / 30s, zoom speed)
 │   ├── idle.js                ← inactivity timer
 │   └── app.js                 ← game flow
 └── assets/images/
