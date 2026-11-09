@@ -4,40 +4,40 @@ Nutramigen mobile quiz game. Plain HTML/CSS/JavaScript — no build step — dep
 
 ## How the game works
 
-1. **Home** — 5 items on a scene. Tap one and the scene zooms into it.
-2. **Question** — progress bar on top (`#/5` on the left, `XX% Complete` on the right), the item image, the question, and 4 answers.
-3. **After answering** — the image swaps to its correct/incorrect version.
-   - Correct: only the correct answer stays, in green, tagged "Correct".
-   - Incorrect: your answer in red on the left ("Incorrect"), the correct answer in green on the right ("Correct").
-   - Below that: an info note, then a ← button back to the remaining questions.
-4. **End** — after all 5: a title and two columns (QR code | copy).
-5. **Idle** — 30s with no taps shows a "still playing?" popup. Ignore it for 45s and the game resets to the homepage.
+Layout and flow follow the **Wireframe** page in Figma (Nutramigen_Activations).
+
+1. **Attract**: "Is your CMPA knowledge ahead of what comes next?" Tap anywhere to begin.
+2. **Flip the Mobile**: a mobile with 5 "problem" ornaments. Tap one and the scene zooms into it.
+3. **Question**: progress bar (`#/5` left, `XX% Complete` right), the ornament, and a card with the question and answers A–D.
+4. **After answering**: the ornament flips to its "after" version, in color if correct and black & white if incorrect. The card shows *Your answer* | *Correct answer*, a "Your answer is correct/incorrect!" note with the Nutramigen statement, then **Select another ornament →** (or **See my score →** on the last one). Answered ornaments stay flipped on the mobile.
+5. **End**: "Congratulations! You have scored a X/5." with the QR code and share copy.
+6. **Idle**: after 30s with no taps a "still there?" popup appears. Ignore it for 45s and the game resets to the attract screen. A "Return to start" bar sits at the bottom of every screen.
 
 ## File structure
 
 ```
-public/                      ← everything Cloudflare serves
-├── index.html               ← all screens (home, question, end, idle popup)
-├── _headers                 ← Cloudflare cache headers
-├── css/styles.css           ← styles; brand colors/fonts are tokens at the top
+public/                        ← everything Cloudflare serves
+├── index.html                 ← all screens + idle popup
+├── _headers                   ← Cloudflare cache headers
+├── css/styles.css             ← styles; colors/fonts are tokens at the top
 ├── js/
-│   ├── content.js           ← ✏️ ALL copy, questions, answers, info notes, image paths
-│   ├── config.js            ← timings (idle 30s / 45s, zoom speed)
-│   ├── idle.js              ← inactivity timer logic
-│   └── app.js               ← game flow
+│   ├── content.js             ← ✏️ ALL copy, questions, answers, statements, image paths
+│   ├── config.js              ← timings (idle 30s / 45s, zoom speed)
+│   ├── idle.js                ← inactivity timer
+│   └── app.js                 ← game flow
 └── assets/images/
-    ├── home-background.svg  ← landing scene background
-    ├── items/               ← item-N.svg, item-N-correct.svg, item-N-incorrect.svg
-    └── end/qr-code.svg      ← QR code on the end screen
-wrangler.jsonc               ← Cloudflare config
-package.json                 ← npm scripts (dev / deploy)
+    ├── backgrounds/           ← attract.svg (Nutramigen mobile), mobile.svg (CMPA mobile)
+    ├── ornaments/             ← before/after art per ornament (milk-carton → ice-cream, etc.)
+    └── end/qr-code.svg        ← QR code on the end screen
+wrangler.jsonc                 ← Cloudflare config
+package.json                   ← npm scripts (start / dev / deploy)
 ```
 
 ### Swapping in real content
 
-- **Copy & questions:** edit `public/js/content.js`. `correctIndex` is 0–3 (0 = first answer).
-- **Images:** drop files into `public/assets/images/…` and update the paths in `content.js`. PNG, JPG, SVG and WebP all work.
-- **Item placement on the home scene:** `position: { x, y }` in `content.js`, as % of the scene.
+- **Copy & questions:** edit `public/js/content.js`. `correctIndex` is 0–3 (0 = A).
+- **Ornament art:** each ornament needs a `before` image and an `after` image, ideally transparent PNGs cut out from the Figma renders. The black-and-white incorrect version is made automatically. To use a separate image instead, set `incorrectImage`.
+- **Backgrounds:** replace the files in `assets/images/backgrounds/`. Nudge each ornament's `position` in `content.js` so it lines up with its string.
 - **Colors/fonts:** the `:root` tokens at the top of `public/css/styles.css`.
 
 ## Run it locally

@@ -1,107 +1,153 @@
 /**
- * ALL GAME COPY + IMAGES LIVE HERE.
- * Edit this file to change questions, answers, info notes, and images.
- * Everything below is placeholder copy — replace with approved content.
+ * ALL GAME COPY + IMAGES LIVE HERE.  (Layout follows the Figma "Wireframe" page.)
+ * Copy marked "Lorem" is placeholder — replace with approved content.
  *
- * Each item:
- *   id              unique key (used to track progress)
- *   label           accessible name for the item on the landing page
- *   position        where the item sits on the landing scene, in % of the scene (x = left, y = top)
- *   image           shown on the question screen before answering (and on the landing page)
- *   imageCorrect    swapped in when the player answers correctly
- *   imageIncorrect  swapped in when the player answers incorrectly
- *   question        the quiz question
- *   answers         exactly 4 answers
- *   correctIndex    0–3, which answer in `answers` is correct
- *   info            the note shown under the result (for both correct and incorrect)
+ * Each item is one ornament on the mobile:
+ *   id            unique key (used to track progress)
+ *   label         accessible name for the ornament
+ *   position      where the ornament hangs on the mobile, in % of the scene (x = left, y = top)
+ *   before        the "problem" ornament (shown on the mobile + on the question screen)
+ *   after         the "flipped" ornament (shown after answering, and on the mobile once answered)
+ *                 Incorrect answers show `after` in black & white automatically.
+ *   question      the quiz question
+ *   answers       exactly 4 answers (A–D letters are added automatically)
+ *   correctIndex  0–3, which answer is correct (0 = A)
+ *   info          the Nutramigen statement shown under the result
+ *
+ * Optional per-item overrides if design supplies separate artwork:
+ *   questionImage, correctImage, incorrectImage
  */
 export const ITEMS = [
   {
-    id: "item-1",
-    label: "Item 1",
-    position: { x: 25, y: 28 },
-    image: "assets/images/items/item-1.svg",
-    imageCorrect: "assets/images/items/item-1-correct.svg",
-    imageIncorrect: "assets/images/items/item-1-incorrect.svg",
-    question: "Question 1 copy goes here?",
-    answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
-    correctIndex: 0,
-    info: "Info note for question 1. Explain why the correct answer is correct.",
-  },
-  {
-    id: "item-2",
-    label: "Item 2",
-    position: { x: 75, y: 28 },
-    image: "assets/images/items/item-2.svg",
-    imageCorrect: "assets/images/items/item-2-correct.svg",
-    imageIncorrect: "assets/images/items/item-2-incorrect.svg",
-    question: "Question 2 copy goes here?",
-    answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
-    correctIndex: 1,
-    info: "Info note for question 2. Explain why the correct answer is correct.",
-  },
-  {
-    id: "item-3",
-    label: "Item 3",
+    id: "milk",
+    label: "Milk carton ornament",
     position: { x: 50, y: 50 },
-    image: "assets/images/items/item-3.svg",
-    imageCorrect: "assets/images/items/item-3-correct.svg",
-    imageIncorrect: "assets/images/items/item-3-incorrect.svg",
-    question: "Question 3 copy goes here?",
-    answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
-    correctIndex: 2,
-    info: "Info note for question 3. Explain why the correct answer is correct.",
-  },
-  {
-    id: "item-4",
-    label: "Item 4",
-    position: { x: 25, y: 72 },
-    image: "assets/images/items/item-4.svg",
-    imageCorrect: "assets/images/items/item-4-correct.svg",
-    imageIncorrect: "assets/images/items/item-4-incorrect.svg",
-    question: "Question 4 copy goes here?",
-    answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
-    correctIndex: 3,
-    info: "Info note for question 4. Explain why the correct answer is correct.",
-  },
-  {
-    id: "item-5",
-    label: "Item 5",
-    position: { x: 75, y: 72 },
-    image: "assets/images/items/item-5.svg",
-    imageCorrect: "assets/images/items/item-5-correct.svg",
-    imageIncorrect: "assets/images/items/item-5-incorrect.svg",
-    question: "Question 5 copy goes here?",
-    answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
+    before: "assets/images/ornaments/milk-carton.svg",
+    after: "assets/images/ornaments/ice-cream.svg",
+    question: "What is the most common food allergy among infants and children younger than age 3?",
+    answers: [
+      "Cow’s milk protein allergy",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+    ],
     correctIndex: 0,
-    info: "Info note for question 5. Explain why the correct answer is correct.",
+    info: "Only Nutramigen has been clinically shown to help babies relieve CMPA symptoms, outgrow CMPA, and disrupt the atopic march!",
+  },
+  {
+    id: "sock",
+    label: "Sock ornament",
+    position: { x: 24, y: 44 },
+    before: "assets/images/ornaments/sock.svg",
+    after: "assets/images/ornaments/cleat.svg",
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answers: [
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+    ],
+    correctIndex: 1,
+    info: "Nutramigen statement lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    id: "peanut",
+    label: "Peanut ornament",
+    position: { x: 24, y: 66 },
+    before: "assets/images/ornaments/peanut.svg",
+    after: "assets/images/ornaments/peanut-butter.svg",
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answers: [
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+    ],
+    correctIndex: 2,
+    info: "Nutramigen statement lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    id: "baby",
+    label: "Baby face ornament",
+    position: { x: 76, y: 44 },
+    before: "assets/images/ornaments/baby-crying.svg",
+    after: "assets/images/ornaments/baby-happy.svg",
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answers: [
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+    ],
+    correctIndex: 3,
+    info: "Nutramigen statement lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    id: "tissues",
+    label: "Tissue box ornament",
+    position: { x: 76, y: 66 },
+    before: "assets/images/ornaments/tissues.svg",
+    after: "assets/images/ornaments/puppy.svg",
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answers: [
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+      "Lorem ipsum dolor sit amet",
+    ],
+    correctIndex: 2,
+    info: "Nutramigen statement lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
 
+/** Opening screen — "Tap anywhere to begin". */
+export const ATTRACT = {
+  title: "Is your CMPA knowledge ahead of what comes next?",
+  subtitle: "or is the risk of future allergic manifestations going unrecognized?",
+  cta: "Tap anywhere to begin",
+  background: "assets/images/backgrounds/attract.svg",
+};
+
+/** The mobile with the 5 ornaments. */
 export const HOME = {
-  title: "Game Title",
-  subtitle: "Tap an item to answer a question. Answer all 5 to finish!",
-  background: "assets/images/home-background.svg",
+  titleBold: "FLIP",
+  titleLight: "THE MOBILE",
+  subtitle: "Can you flip their CMPA story?",
+  cta: "Tap an ornament to reveal a question",
+  background: "assets/images/backgrounds/mobile.svg",
 };
 
 export const QUESTION = {
-  correctTag: "Correct",
-  incorrectTag: "Incorrect",
-  backLabel: "Go back to answer the remaining questions",
-  finishLabel: "See your results",
+  selectPrompt: "Select an answer below:",
+  yourAnswer: "Your answer:",
+  correctAnswer: "Correct answer:",
+  correctTitle: "Your answer is correct!",
+  incorrectTitle: "Your answer is incorrect!",
+  nextLabel: "Select another ornament",
+  finishLabel: "See my score",
 };
 
 export const END = {
-  title: "You did it!",
+  title: "Congratulations!",
+  /** {score} and {total} are filled in automatically. */
+  score: "You have scored a {score}/{total}.",
+  background: "assets/images/backgrounds/attract.svg",
   qrImage: "assets/images/end/qr-code.svg",
-  qrAlt: "QR code — scan to learn more",
-  heading: "Scan to learn more",
-  body: "End screen copy goes here. Tell players what they'll find when they scan the QR code.",
-  restartLabel: "Start over",
+  qrAlt: "QR code — scan to share your score",
+  intro: "Keep learning to support your CMPA patients.",
+  heading: "Share your score!",
+  body: "Challenge other HCPs and see who knows CMPA best.",
+  hashtag: "#FlipthemobileCMPA",
+};
+
+export const FOOTER = {
+  returnLabel: "Return to start",
+  exitLabel: "Exit and return to start",
 };
 
 export const IDLE = {
-  title: "Are you still there?",
-  body: "Tap below to keep playing, or the game will restart soon.",
-  buttonLabel: "Yes, I'm still playing",
+  heading: "Keep playing to flip the mobile and learn more about CMPA.",
+  body: "Lorem ipsum dolor sit amet",
+  question: "Are you still there?",
+  buttonLabel: "Yes, keep playing",
 };
