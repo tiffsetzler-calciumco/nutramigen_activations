@@ -1,5 +1,5 @@
 {
-  // Cloudflare Workers config — serves everything in ./public as a static site.
+  // Cloudflare Workers config — serves the built ./dist folder as a static site.
   // Docs: https://developers.cloudflare.com/workers/static-assets/
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "nutramigen-activations",
@@ -8,8 +8,12 @@
   "workers_dev": true,
   // Each branch / pull request gets its own preview URL.
   "preview_urls": true,
+  // `wrangler deploy` (and Cloudflare's auto-deploy) runs this first: compiles SCSS + copies src/ → dist/.
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
-    "directory": "./public",
+    "directory": "./dist",
     "not_found_handling": "single-page-application"
   }
 }

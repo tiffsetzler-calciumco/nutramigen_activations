@@ -1,0 +1,25 @@
+// =========================================================
+// 4. End
+// =========================================================
+@use "variables" as *;
+
+.end-card {
+  position: absolute;
+  left: $gutter;
+  right: $gutter;
+  bottom: calc($footer-h + 24px);
+  display: grid;
+  grid-template-columns: minmax(110px, 40%) 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 18px;
+  border-radius: $radius-card;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: $shadow;
+  animation: slide-up 450ms ease-out;
+}
+
+.end-card__qr { width: 100%; aspect-ratio: 1; border: 2px solid $color-ink; border-radius: 10px; background: #fff; }
+.end-card__heading { margin: 10px 0 6px; font-size: 1.2rem; font-weight: 800; }
+.end-card__small { margin: 0; font-size: 0.8rem; line-height: 1.35; }
+.end-card__hashtag { margin-top: 10px; }

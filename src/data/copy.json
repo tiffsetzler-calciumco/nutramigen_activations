@@ -1,0 +1,45 @@
+{
+  "attract": {
+    "title": "Is your CMPA knowledge ahead of what comes next?",
+    "subtitle": "or is the risk of future allergic manifestations going unrecognized?",
+    "cta": "Tap anywhere to begin",
+    "background": "img/backgrounds/attract.svg"
+  },
+  "home": {
+    "titleBold": "FLIP",
+    "titleLight": "THE MOBILE",
+    "subtitle": "Can you flip their CMPA story?",
+    "cta": "Tap an ornament to reveal a question",
+    "background": "img/backgrounds/mobile.svg"
+  },
+  "question": {
+    "selectPrompt": "Select an answer below:",
+    "yourAnswer": "Your answer:",
+    "correctAnswer": "Correct answer:",
+    "correctTitle": "Your answer is correct!",
+    "incorrectTitle": "Your answer is incorrect!",
+    "nextLabel": "Select another ornament",
+    "finishLabel": "See my score"
+  },
+  "end": {
+    "title": "Congratulations!",
+    "score": "You have scored a {score}/{total}.",
+    "background": "img/backgrounds/attract.svg",
+    "qrImage": "img/end/qr-code.svg",
+    "qrAlt": "QR code — scan to share your score",
+    "intro": "Keep learning to support your CMPA patients.",
+    "heading": "Share your score!",
+    "body": "Challenge other HCPs and see who knows CMPA best.",
+    "hashtag": "#FlipthemobileCMPA"
+  },
+  "footer": {
+    "returnLabel": "Return to start",
+    "exitLabel": "Exit and return to start"
+  },
+  "idle": {
+    "heading": "Keep playing to flip the mobile and learn more about CMPA.",
+    "body": "Lorem ipsum dolor sit amet",
+    "question": "Are you still there?",
+    "buttonLabel": "Yes, keep playing"
+  }
+}

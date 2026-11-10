@@ -1,0 +1,27 @@
+// =========================================================
+// Variables — change colors, fonts, sizes here.
+// Every other partial uses these, so one edit updates the whole game.
+// =========================================================
+
+$color-bg: #2b2522; // dark nursery tone behind everything
+$color-ink: #111111;
+$color-muted: #555555;
+$color-surface: #ffffff;
+$color-on-dark: #ffffff;
+$color-brand: #e8732a; // Nutramigen orange: progress, CTAs, pill borders
+$color-question: #e0352b; // red question text
+$color-track: #c9c9c9;
+$color-question-bg: #9a9a9a; // gray behind the zoomed ornament
+$color-correct: #7cb342;
+$color-correct-pill: #c6f1b5;
+$color-correct-bg: #ebf7e3;
+$color-incorrect: #e0352b;
+$color-incorrect-pill: #fbe3e0;
+$color-incorrect-bg: #fbe3e0;
+$font: "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$radius-card: 20px;
+$radius-pill: 10px;
+$shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+$gutter: 16px;
+$max-width: 520px; // portrait / phone layout
+$footer-h: 56px;

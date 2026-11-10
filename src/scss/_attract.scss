@@ -1,0 +1,7 @@
+// =========================================================
+// 1. Attract
+// =========================================================
+@use "variables" as *;
+
+.screen--attract { cursor: pointer; }
+.screen--attract .tap-cta { bottom: 48px; }

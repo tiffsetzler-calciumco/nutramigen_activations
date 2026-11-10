@@ -1,0 +1,56 @@
+// =========================================================
+// Base
+// =========================================================
+@use "variables" as *;
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: $color-bg;
+  color: $color-ink;
+  font-family: $font;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior: none;
+}
+
+img { max-width: 100%; display: block; -webkit-user-drag: none; }
+button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; }
+[hidden] { display: none !important; }
+
+#app {
+  position: relative;
+  height: 100dvh;
+  max-width: $max-width;
+  margin: 0 auto;
+  overflow: hidden;
+  background: $color-bg;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+}
+.screen.is-active { display: flex; animation: fade-in 350ms ease-out; }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Dark gradient at the top so white headlines stay readable on photos. */
+.screen--attract::before,
+.screen--end::before,
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 40%;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), transparent);
+  pointer-events: none;
+}

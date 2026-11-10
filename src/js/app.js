@@ -1,6 +1,15 @@
-import { ITEMS, ATTRACT, HOME, QUESTION, END, FOOTER, IDLE } from "./content.js";
 import { CONFIG } from "./config.js";
 import { createIdleWatcher } from "./idle.js";
+
+/* ---------------- content (edit the JSON files in /data) ---------------- */
+const loadJson = (path) =>
+  fetch(path, { cache: "no-cache" }).then((r) => {
+    if (!r.ok) throw new Error(`Could not load ${path} (${r.status})`);
+    return r.json();
+  });
+
+const [ITEMS, COPY] = await Promise.all([loadJson("data/questions.json"), loadJson("data/copy.json")]);
+const { attract: ATTRACT, home: HOME, question: QUESTION, end: END, footer: FOOTER, idle: IDLE } = COPY;
 
 /* ---------------- state ---------------- */
 const state = {

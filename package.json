@@ -2,13 +2,20 @@
   "name": "nutramigen-activations",
   "version": "1.0.0",
   "private": true,
-  "description": "Nutramigen quiz activation game",
+  "type": "module",
+  "description": "Nutramigen 'Flip the Mobile' quiz activation",
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
-    "dev": "wrangler dev",
-    "start": "python3 -m http.server 5173 -d public",
+    "dev": "node scripts/build.mjs --watch",
+    "build": "node scripts/build.mjs",
+    "package": "npm run build && rm -f nutramigen-activations.zip && cd dist && zip -qr ../nutramigen-activations.zip . && cd .. && echo '✔ nutramigen-activations.zip created'",
+    "preview": "npm run build && wrangler dev",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
+    "sass": "^1.83.0",
     "wrangler": "^4.0.0"
   }
 }
