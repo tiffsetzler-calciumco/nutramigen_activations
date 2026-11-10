@@ -3,6 +3,8 @@
 // =========================================================
 @use "variables" as *;
 
+.screen--end { background: url("../img/#{$bg-end}") center / cover no-repeat; }
+
 .end-card {
   position: absolute;
   left: $gutter;
@@ -16,7 +18,6 @@
   border-radius: $radius-card;
   background: rgba(255, 255, 255, 0.92);
   box-shadow: $shadow;
-  animation: slide-up 450ms ease-out;
 }
 
 .end-card__qr { width: 100%; aspect-ratio: 1; border: 2px solid $color-ink; border-radius: 10px; background: #fff; }

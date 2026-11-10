@@ -25,3 +25,13 @@ $shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 $gutter: 16px;
 $max-width: 520px; // portrait / phone layout
 $footer-h: 56px;
+
+// Images (file names in /img)
+$bg-attract: "attract-background.svg";
+$bg-mobile: "mobile-background.svg";
+$bg-end: "attract-background.svg";
+
+// Ornaments on the mobile
+$ornament-size: clamp(80px, 24vw, 120px);
+$ornament-string: 90px; // length of the string above each ornament
+$ornament-string-color: rgba(255, 255, 255, 0.6);

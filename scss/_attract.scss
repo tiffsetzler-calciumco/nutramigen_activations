@@ -3,5 +3,8 @@
 // =========================================================
 @use "variables" as *;
 
-.screen--attract { cursor: pointer; }
+.screen--attract {
+  cursor: pointer;
+  background: url("../img/#{$bg-attract}") center / cover no-repeat;
+}
 .screen--attract .tap-cta { bottom: 48px; }

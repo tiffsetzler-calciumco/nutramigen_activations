@@ -15,34 +15,38 @@
 }
 .progress__labels { display: flex; justify-content: space-between; margin-bottom: 8px; }
 .progress__track { height: 10px; border-radius: 999px; background: $color-track; overflow: hidden; }
-.progress__fill { width: 0; height: 100%; border-radius: inherit; background: $color-brand; transition: width 600ms ease; }
+.progress__fill { width: 0; height: 100%; border-radius: inherit; background: $color-brand; } // width animated by GSAP
 
-.question__figure {
+// one <article> per question; only the active one is shown
+.question {
   flex: 1;
   min-height: 0;
-  margin: 0;
-  display: grid;
-  place-items: center;
-  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.question__figure {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 12px 24px;
   perspective: 900px;
 }
 
+// "before" and "after" art are stacked; GSAP flips between them
 .question__image {
-  max-height: 100%;
-  width: min(80%, 340px);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.3));
-  animation: zoom-in 450ms ease-out;
-  transition: filter 300ms ease;
 }
-.question__image.is-grayscale { filter: grayscale(1) drop-shadow(0 14px 18px rgba(0, 0, 0, 0.3)); }
-.question__image.is-flipping { animation: flip 700ms ease-in-out; }
+.question__image--after { visibility: hidden; }
 
-@keyframes zoom-in { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-@keyframes flip {
-  0% { transform: rotateY(0); }
-  50% { transform: rotateY(90deg); }
-  100% { transform: rotateY(0); }
+// incorrect answer → "after" art in black & white
+.question.is-grayscale .question__image--after {
+  filter: grayscale(1) drop-shadow(0 14px 18px rgba(0, 0, 0, 0.3));
 }
 
 .card {
@@ -53,10 +57,8 @@
   border-radius: $radius-card;
   background: $color-surface;
   box-shadow: $shadow;
-  animation: slide-up 400ms ease-out;
 }
 
-@keyframes slide-up { from { transform: translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
 
 .card__question {
   margin: 0 0 12px;
@@ -88,16 +90,14 @@
 .pill--correct { background: $color-correct-pill; }
 .pill--incorrect { background: $color-incorrect-pill; }
 
-.result { animation: fade-in 350ms ease-out; }
+
 .result__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .result__label { margin: 0 0 6px; font-size: 0.8rem; }
 
 .feedback { margin-top: 14px; padding: 14px 16px; border-radius: 12px; }
-.feedback--correct { background: $color-correct-bg; }
-.feedback--incorrect { background: $color-incorrect-bg; }
 .feedback__title { margin: 0 0 4px; font-weight: 800; text-transform: uppercase; font-size: 0.95rem; }
-.feedback--correct .feedback__title { color: $color-correct; }
-.feedback--incorrect .feedback__title { color: $color-incorrect; }
+.feedback__title--correct { color: $color-correct; }
+.feedback__title--incorrect { color: $color-incorrect; }
 .feedback__info { margin: 0; font-weight: 700; line-height: 1.3; font-size: 0.95rem; }
 
 .next-button {
@@ -113,3 +113,16 @@
   letter-spacing: 0.02em;
 }
 .next-button span:last-child { font-size: 1.3rem; }
+
+// feedback title + next label: show the right one
+.feedback__title--correct,
+.feedback__title--incorrect,
+.next-button__finish { display: none; }
+.question.is-correct .feedback__title--correct,
+.question.is-incorrect .feedback__title--incorrect { display: block; }
+.question.is-correct .feedback { background: $color-correct-bg; }
+.question.is-incorrect .feedback { background: $color-incorrect-bg; }
+.question.is-final {
+  .next-button__more { display: none; }
+  .next-button__finish { display: inline; }
+}
