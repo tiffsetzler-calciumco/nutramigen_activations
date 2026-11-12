@@ -90,6 +90,19 @@ export function flipQuestionImage(article) {
     .then();
 }
 
+/** Correct answer: the image stays as is and bobbles left/right, like a nudged ornament. */
+export function bobbleQuestionImage(article) {
+  const image = article.querySelector(".question__image--before");
+  return gsap
+    .to(image, {
+      keyframes: { rotation: [0, -9, 8, -5, 3, -1, 0] },
+      transformOrigin: "50% 0%", // swing from the top, where it hangs
+      duration: 1.1,
+      ease: "sine.inOut",
+    })
+    .then();
+}
+
 /** Result area fades/slides in. */
 export function revealResult(result) {
   gsap.fromTo(result, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.35, ease: "power2.out" });

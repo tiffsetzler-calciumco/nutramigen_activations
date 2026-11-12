@@ -11,7 +11,10 @@
   will-change: transform, opacity;
 }
 
-.ornaments { position: absolute; inset: 0; }
+.ornaments {
+  position: absolute;
+  inset: 0;
+}
 
 .ornament {
   --size: #{$ornament-size};
@@ -27,7 +30,9 @@
   transform-origin: 50% calc(-1 * #{$ornament-string}); // sway from the top of the string
   perspective: 600px;
 
-  &:disabled { cursor: default; }
+  &:disabled {
+    cursor: default;
+  }
 }
 
 // the string the ornament hangs from
@@ -59,10 +64,18 @@
 }
 
 // before answering: show "before" art; after: show "after" art
-.ornament__after { visibility: hidden; }
+.ornament__after {
+  visibility: hidden;
+}
 .ornament.is-flipped {
-  .ornament__before { visibility: hidden; }
-  .ornament__after { visibility: visible; }
+  .ornament__before {
+    visibility: hidden;
+  }
+  .ornament__after {
+    visibility: visible;
+  }
 }
 
-.ornament:not(:disabled):active .ornament__inner { scale: 0.94; }
+.ornament:not(:disabled):active .ornament__inner {
+  scale: 0.94;
+}

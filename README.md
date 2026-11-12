@@ -32,7 +32,7 @@ Run all of these from the project folder.
 
 | What you want to do | Command | What happens |
 | --- | --- | --- |
-| **Work on the game** | `npm run dev` | Builds the game, serves it at **http://localhost:5173**, and rebuilds every time you save. Refresh the browser to see changes. Press **Ctrl + C** to stop. |
+| **Work on the game** | `npm run dev` | Builds the game, serves it at **http://localhost:5173**, opens it in your browser, and rebuilds every time you save. Refresh the browser to see changes. Press **Ctrl + C** to stop. |
 | **Build** | `npm run build` | Turns `index.hbs` + `questions.json` into `dist/index.html`, compiles SCSS into `dist/css/styles.css`, and copies `img/`, `js/` and GSAP into `dist/`. |
 | **Package (zip)** | `npm run package` | Builds, then zips `dist/` into **`nutramigen-activations.zip`** to hand off or upload anywhere. |
 | **Test like Cloudflare** | `npm run preview` | Builds and runs the site in Cloudflare's local runtime. |
@@ -98,8 +98,8 @@ Keep the `class="js-…"` names and the `data-…` attributes, because the game 
   "label": "Milk carton ornament",
   "x": 50,
   "y": 50,
-  "before": "milk-carton.svg",
-  "after": "ice-cream.svg",
+  "before": "milk-problem.png",
+  "after": "ice-cream-solution.png",
   "question": "What is the most common food allergy among infants and children younger than age 3?",
   "answers": ["Cow’s milk protein allergy", "Answer B", "Answer C", "Answer D"],
   "correct": "A",
@@ -112,19 +112,19 @@ Keep the `class="js-…"` names and the `data-…` attributes, because the game 
 | `id` | Unique short name |
 | `label` | What screen readers announce for the ornament |
 | `x`, `y` | Where the ornament hangs on the mobile: % from the left, % from the top |
-| `before` | "Problem" ornament: on the mobile and the question screen. A file name from `img/`. |
-| `after` | "Flipped" ornament: shown after answering, in color if correct and automatically black & white if incorrect |
+| `before` | "Problem" ornament (`-problem.png`): what the mobile shows before the question is answered. A file name from `img/`. |
+| `after` | "Solution" ornament (`-solution.png`): shown on the question screen, and on the mobile after a **correct** answer |
 | `answers` | Exactly 4 |
 | `correct` | `"A"`, `"B"`, `"C"` or `"D"` |
 | `info` | The statement shown under the result |
-| *optional* `incorrectImage` | Use a separate image for wrong answers instead of the automatic black & white |
+| `incorrectImage` | "Incorrect" ornament (`-incorrect.png`): shown after a **wrong** answer, on the question screen and on the mobile. If left out, the problem image is used. |
 
 The build checks this file. If something's wrong (a missing image, 3 answers instead of 4, a bad `correct` letter), the terminal names the exact question and problem. JSON is strict: keep the double quotes, put commas between items, and don't add a comma after the last item.
 
 ### Images: `img/`
 
 - Put every image directly in `img/`, with no subfolders.
-- In `questions.json`, use just the file name: `"before": "milk-carton.png"`.
+- In `questions.json`, use just the file name: `"before": "milk-problem.png"`.
 - In `index.hbs`, use `img/file-name.png`.
 - In SCSS, use `url("../img/file-name.png")`. The background images are set by name in `_variables.scss` (`$bg-attract`, `$bg-mobile`, `$bg-end`).
 - PNG, JPG, SVG and WebP all work. Use **transparent PNGs** for ornaments.
@@ -139,7 +139,8 @@ Each moment in the game has its own function, so you can change the motion witho
 | `zoomIntoOrnament` | An ornament is tapped: the mobile zooms into it |
 | `flipOrnament` | Back on the mobile after answering: that ornament flips from `before` to `after` |
 | `introQuestion` | Question opens: the ornament pops in and the card slides up |
-| `flipQuestionImage` | Answer chosen: the big ornament flips to its `after` art |
+| `bobbleQuestionImage` | Correct answer: the big ornament stays as is and bobbles left/right |
+| `flipQuestionImage` | Wrong answer: the big ornament flips to its `-incorrect` art |
 | `revealResult`, `setProgress`, `introEnd` | Result card, progress bar, end screen |
 
 GSAP is installed from npm and copied into `dist/js/vendor/` by the build, so it works offline at the booth. GSAP docs: https://gsap.com/docs/v3/
@@ -181,7 +182,7 @@ Layout and flow follow the **Wireframe** page in the Figma file *Nutramigen_Acti
 1. **Attract**: tap anywhere to begin.
 2. **Flip the Mobile**: tap an ornament and the mobile zooms into it.
 3. **Question**: progress bar (`#/5` on the left, `XX% Complete` on the right), the ornament, and the question with answers A–D.
-4. **After answering**: the ornament flips, in color if correct and black & white if incorrect. The card shows *Your answer* and *Correct answer*, then the statement, then **Select another ornament →** (or **See my score →** on the last question). Back on the mobile, that ornament flips to its new art.
+4. **After answering**: the ornament stays on its solution image if correct, or flips to its incorrect image if wrong. Back on the mobile, that ornament flips the same way. The card shows *Your answer* and *Correct answer*, then the statement, then **Select another ornament →** (or **See my score →** on the last question). Back on the mobile, that ornament flips to its new art.
 5. **End**: "Congratulations! You have scored a X/5." with the QR code.
 6. **Idle**: after 45s with no taps, an "Are you still there?" popup appears. If nobody answers within 30s, the game resets to the start.
 

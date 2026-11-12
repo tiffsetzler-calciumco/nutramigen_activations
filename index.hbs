@@ -10,20 +10,11 @@
     <title>Flip the Mobile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Lato:wght@900&family=DM+Sans:wght@400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    {{!--
-      MAIN PAGE TEMPLATE
-      - Questions come from questions.json  →  {{#each questions}} below
-      - Images live in /img                 →  src="img/{{before}}"
-      - `npm run dev` / `npm run build` turn this file into dist/index.html
-    --}}
-    <main id="app">
+   <main id="app">
       {{!-- ============ 1. ATTRACT: "Tap anywhere to begin" ============ --}}
       <section id="screen-attract" class="screen screen--attract is-active" aria-labelledby="attract-title">
         <div class="hero">
@@ -31,12 +22,11 @@
           <p class="hero__subtitle">or is the risk of future allergic manifestations going unrecognized?</p>
         </div>
         <p class="tap-cta">
-          <span class="tap-cta__icon" aria-hidden="true">☝</span>
+          <span class="tap-cta__icon" aria-hidden="true"><img src="img/tap.svg" alt="Tap anywhere to begin" /></span>
           <span>Tap anywhere to begin</span>
         </p>
       </section>
 
-      {{!-- ============ 2. HOME: the mobile ============ --}}
       <section id="screen-home" class="screen screen--home" aria-labelledby="home-title">
         <div id="scene" class="scene">
           <div class="hero">
@@ -56,14 +46,14 @@
                 <span class="ornament__string" aria-hidden="true"></span>
                 <span class="ornament__inner">
                   <img class="ornament__before" src="img/{{before}}" alt="" draggable="false" />
-                  <img class="ornament__after" src="img/{{after}}" alt="" draggable="false" />
+                  <img class="ornament__after" src="img/{{after}}" data-incorrect-src="img/{{incorrectImage}}" alt="" draggable="false" />
                 </span>
               </button>
             {{/each}}
           </div>
 
           <p class="tap-cta">
-            <span class="tap-cta__icon" aria-hidden="true">☝</span>
+            <span class="tap-cta__icon" aria-hidden="true"><img src="img/tap.svg" alt="Tap an ornament to reveal a question" /></span>
             <span>Tap an ornament to reveal a question</span>
           </p>
         </div>
@@ -85,11 +75,11 @@
         {{#each questions}}
           <article class="question" data-id="{{id}}" data-correct="{{correctIndex}}" hidden>
             <figure class="question__figure">
-              <img class="question__image question__image--before" src="img/{{before}}" alt="" />
+              <img class="question__image question__image--before" src="img/{{after}}" alt="" />
               <img
                 class="question__image question__image--after"
                 src="img/{{after}}"
-                {{#if incorrectImage}}data-incorrect-src="img/{{incorrectImage}}"{{/if}}
+                data-incorrect-src="img/{{incorrectImage}}"
                 alt=""
               />
             </figure>

@@ -5,8 +5,9 @@
       "label": "Milk carton ornament",
       "x": 50,
       "y": 50,
-      "before": "milk-carton.svg",
-      "after": "ice-cream.svg",
+      "before": "milk-problem.png",
+      "after": "ice-cream-solution.png",
+      "incorrectImage": "ice-cream-incorrect.png",
       "question": "What is the most common food allergy among infants and children younger than age 3?",
       "answers": [
         "Cow’s milk protein allergy",
@@ -18,12 +19,13 @@
       "info": "Only Nutramigen has been clinically shown to help babies relieve CMPA symptoms, outgrow CMPA, and disrupt the atopic march!"
     },
     {
-      "id": "sock",
-      "label": "Sock ornament",
+      "id": "inhaler",
+      "label": "Inhaler ornament",
       "x": 24,
       "y": 44,
-      "before": "sock.svg",
-      "after": "cleat.svg",
+      "before": "inhaler-problem.png",
+      "after": "cleat-solution.png",
+      "incorrectImage": "cleat-incorrect.png",
       "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
       "answers": [
         "Lorem ipsum dolor sit amet",
@@ -56,8 +58,9 @@
       "label": "Baby face ornament",
       "x": 76,
       "y": 44,
-      "before": "baby-crying.svg",
-      "after": "baby-happy.svg",
+      "before": "baby-problem.png",
+      "after": "baby-solution.png",
+      "incorrectImage": "baby-incorrect.png",
       "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
       "answers": [
         "Lorem ipsum dolor sit amet",
@@ -69,12 +72,13 @@
       "info": "Nutramigen statement lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-      "id": "tissues",
+      "id": "tissue",
       "label": "Tissue box ornament",
       "x": 76,
       "y": 66,
-      "before": "tissues.svg",
-      "after": "puppy.svg",
+      "before": "tissue-problem.png",
+      "after": "dog-solution.png",
+      "incorrectImage": "dog-incorrect.png",
       "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
       "answers": [
         "Lorem ipsum dolor sit amet",

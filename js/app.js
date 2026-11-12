@@ -19,10 +19,9 @@ const scene = $("#scene");
 const ornaments = $$(".ornament");
 const articles = $$(".question");
 const TOTAL = articles.length;
-articles.forEach((a) => {
-  const after = $(".question__image--after", a);
-  after.dataset.originalSrc = after.getAttribute("src");
-});
+// Remember each "solution" image so a wrong answer can be undone on reset.
+const afterImages = [...$$(".question__image--after"), ...$$(".ornament__after")];
+afterImages.forEach((img) => (img.dataset.originalSrc = img.getAttribute("src")));
 
 /* ---------------- state ---------------- */
 const state = {
@@ -94,11 +93,13 @@ async function answerQuestion(article, button) {
   yours.textContent = button.textContent;
   yours.className = `pill js-your-answer ${correct ? "pill--correct" : "pill--incorrect"}`;
 
-  // Incorrect → black & white "after" image (or a custom incorrect image if provided)
-  const after = $(".question__image--after", article);
-  if (!correct && after.dataset.incorrectSrc) after.src = after.dataset.incorrectSrc;
+  // Correct → "after" (solution) image. Incorrect → the problem image again
+  // (or "incorrectImage" from questions.json), on the quiz and on the mobile.
+  if (!correct) {
+    const ornamentAfter = $(".ornament__after", ornaments.find((o) => o.dataset.id === id));
+    [$(".question__image--after", article), ornamentAfter].forEach((img) => (img.src = img.dataset.incorrectSrc));
+  }
   article.classList.add("is-answered", correct ? "is-correct" : "is-incorrect");
-  article.classList.toggle("is-grayscale", !correct && !after.dataset.incorrectSrc);
   article.classList.toggle("is-final", state.answered.size === TOTAL);
 
   $(".ask", article).hidden = true;
@@ -106,7 +107,8 @@ async function answerQuestion(article, button) {
   result.hidden = false;
   anim.revealResult(result);
   updateProgress();
-  await anim.flipQuestionImage(article);
+  // Correct → keep the image and bobble it. Incorrect → flip to the -incorrect image.
+  await (correct ? anim.bobbleQuestionImage(article) : anim.flipQuestionImage(article));
 }
 
 articles.forEach((article) => {
@@ -136,13 +138,12 @@ function resetGame() {
     anim.setOrnamentFlipped(o, false);
   });
   articles.forEach((article) => {
-    article.classList.remove("is-answered", "is-correct", "is-incorrect", "is-grayscale", "is-final");
+    article.classList.remove("is-answered", "is-correct", "is-incorrect", "is-final");
     $(".ask", article).hidden = false;
     $(".result", article).hidden = true;
-    const after = $(".question__image--after", article);
-    after.src = after.dataset.originalSrc; // undo any custom "incorrect" image
     anim.resetQuestion(article);
   });
+  afterImages.forEach((img) => (img.src = img.dataset.originalSrc)); // undo any wrong-answer images
   updateProgress();
   showScreen("attract");
 }

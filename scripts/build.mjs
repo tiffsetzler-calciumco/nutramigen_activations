@@ -11,6 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import http from "node:http";
+import { exec } from "node:child_process";
 import { createRequire } from "node:module";
 import Handlebars from "handlebars";
 import * as sass from "sass";
@@ -42,7 +43,8 @@ function loadQuestions() {
       if (q[key] && !fs.existsSync(path.join(ROOT, "img", q[key]))) problems.push(`${where}: img/${q[key]} not found`);
     }
     const answers = (q.answers || []).map((text, n) => ({ letter: LETTERS[n], text }));
-    return { ...q, answers, correctIndex, correctAnswer: answers[correctIndex] || { letter: "?", text: "" } };
+    const incorrectImage = q.incorrectImage || q.before; // wrong answer → show the problem image again
+    return { ...q, incorrectImage, answers, correctIndex, correctAnswer: answers[correctIndex] || { letter: "?", text: "" } };
   });
   if (!questions.length) problems.push('no questions found — expected { "questions": [ … ] }');
   if (problems.length) throw new Error("questions.json:\n  - " + problems.join("\n  - "));
@@ -131,5 +133,13 @@ if (watch) {
       });
       fs.createReadStream(file).pipe(res);
     })
-    .listen(PORT, () => console.log(`\n▶ Game running at http://localhost:${PORT}  (Ctrl+C to stop)\n`));
+    .listen(PORT, () => {
+      const url = `http://localhost:${PORT}`;
+      console.log(`\n▶ Game running at ${url}  (Ctrl+C to stop)\n`);
+      // Open it in the default browser (skip with: NO_OPEN=1 npm run dev)
+      if (!process.env.NO_OPEN) {
+        const cmd = process.platform === "darwin" ? "open" : process.platform === "win32" ? "start \"\"" : "xdg-open";
+        exec(`${cmd} ${url}`);
+      }
+    });
 }
