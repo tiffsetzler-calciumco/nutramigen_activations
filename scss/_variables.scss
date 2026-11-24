@@ -25,10 +25,9 @@ $footer-h: 56px;
 
 // Images (file names in /img)
 $bg-attract: "attract-background.png";
-$bg-mobile: "mobile-background.svg";
+$bg-mobile: "mobile-background.png";
+$bg-mobile-ratio: "483 / 814"; // width / height of mobile-background.png — update if the image changes
 $bg-end: "attract-background.png";
 
-// Ornaments on the mobile
-$ornament-size: clamp(80px, 24vw, 120px);
-$ornament-string: 90px; // length of the string above each ornament
+// Ornaments on the mobile (position + size live in questions.json)
 $ornament-string-color: rgba(255, 255, 255, 0.6);

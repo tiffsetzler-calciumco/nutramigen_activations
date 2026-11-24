@@ -107,8 +107,9 @@ async function answerQuestion(article, button) {
   result.hidden = false;
   anim.revealResult(result);
   updateProgress();
-  // Correct → keep the image and bobble it. Incorrect → flip to the -incorrect image.
-  await (correct ? anim.bobbleQuestionImage(article) : anim.flipQuestionImage(article));
+  // Flip from the problem image to the solution (correct) or greyscale -incorrect image.
+  await anim.flipQuestionImage(article);
+  if (correct) await anim.bobbleQuestionImage(article);
 }
 
 articles.forEach((article) => {

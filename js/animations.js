@@ -32,12 +32,15 @@ export function swayOrnaments(ornaments) {
 
 /** Zoom the mobile into the tapped ornament. Resolves when done. */
 export function zoomIntoOrnament(scene, ornament) {
-  const x = ornament.style.getPropertyValue("--x");
-  const y = ornament.style.getPropertyValue("--y");
+  // zoom towards the ornament's centre, measured relative to the scene
+  const s = scene.getBoundingClientRect();
+  const o = ornament.getBoundingClientRect();
+  const x = o.left + o.width / 2 - s.left;
+  const y = o.top + o.height / 2 - s.top;
   return gsap
     .timeline()
     .to(ornament, { scale: 1.15, duration: 0.15, ease: "power1.out" })
-    .to(scene, { scale: 3, autoAlpha: 0, transformOrigin: `${x} ${y}`, duration: 0.6, ease: "power2.in" }, "<0.05")
+    .to(scene, { scale: 3, autoAlpha: 0, transformOrigin: `${x}px ${y}px`, duration: 0.6, ease: "power2.in" }, "<0.05")
     .then();
 }
 
@@ -90,9 +93,9 @@ export function flipQuestionImage(article) {
     .then();
 }
 
-/** Correct answer: the image stays as is and bobbles left/right, like a nudged ornament. */
+/** Correct answer: after flipping, the solution image bobbles left/right, like a nudged ornament. */
 export function bobbleQuestionImage(article) {
-  const image = article.querySelector(".question__image--before");
+  const image = article.querySelector(".question__image--after");
   return gsap
     .to(image, {
       keyframes: { rotation: [0, -9, 8, -5, 3, -1, 0] },

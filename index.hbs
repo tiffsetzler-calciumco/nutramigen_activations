@@ -40,7 +40,7 @@
                 class="ornament"
                 type="button"
                 data-id="{{id}}"
-                style="--x: {{x}}%; --y: {{y}}%"
+                style="--x: {{x}}; --y: {{y}}; --hang: {{hang}}; --size: {{size}}"
                 aria-label="{{label}}"
               >
                 <span class="ornament__string" aria-hidden="true"></span>
@@ -75,7 +75,7 @@
         {{#each questions}}
           <article class="question" data-id="{{id}}" data-correct="{{correctIndex}}" hidden>
             <figure class="question__figure">
-              <img class="question__image question__image--before" src="img/{{after}}" alt="" />
+              <img class="question__image question__image--before" src="img/{{before}}" alt="" />
               <img
                 class="question__image question__image--after"
                 src="img/{{after}}"

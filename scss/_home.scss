@@ -7,27 +7,38 @@
 .scene {
   position: absolute;
   inset: 0 0 $footer-h;
-  background: url("../img/#{$bg-mobile}") center top / cover no-repeat;
+  overflow: hidden;
+  container-type: size;
+  background: $color-bg;
   will-change: transform, opacity;
 }
 
+// The background image and the ornaments share one box with the image's
+// proportions, scaled like `background-size: cover` (anchored top-centre).
+// So the x/y/hang/size %s in questions.json always line up with the mobile in the picture.
 .ornaments {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 50%;
+  width: max(100cqw, 100cqh * #{$bg-mobile-ratio});
+  aspect-ratio: #{$bg-mobile-ratio};
+  translate: -50% 0;
+  container-type: size;
+  background: url("../img/#{$bg-mobile}") center / 100% 100% no-repeat;
 }
 
+// --x, --y (centre), --hang (where the string attaches) and --size are unitless %s of the background
 .ornament {
-  --size: #{$ornament-size};
   position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--size);
-  height: var(--size);
-  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2); // centre on x/y without using transform (GSAP owns transform)
+  left: calc(var(--x) * 1cqw);
+  top: calc(var(--y) * 1cqh);
+  width: calc(var(--size) * 1cqw);
+  height: calc(var(--size) * 1cqw);
+  margin: calc(var(--size) * -0.5cqw) 0 0 calc(var(--size) * -0.5cqw); // centre on x/y without using transform (GSAP owns transform)
   padding: 0;
   border: 0;
   background: none;
-  transform-origin: 50% calc(-1 * #{$ornament-string}); // sway from the top of the string
+  transform-origin: 50% calc((var(--hang) - var(--y)) * 1cqh + var(--size) * 0.5cqw); // sway from where the string attaches
   perspective: 600px;
 
   &:disabled {
@@ -39,9 +50,9 @@
 .ornament__string {
   position: absolute;
   left: 50%;
-  bottom: 92%;
+  bottom: 50%; // runs from the ornament's centre (hidden behind the art) up to the attach point
   width: 1.5px;
-  height: $ornament-string;
+  height: calc((var(--y) - var(--hang)) * 1cqh);
   background: $ornament-string-color;
 }
 
